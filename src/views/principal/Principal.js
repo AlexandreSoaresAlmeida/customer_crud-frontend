@@ -67,6 +67,26 @@ const Principal = (prop) => {
   const [ddd, setDdd] = useState('')
   const [siafi, setSiafi] = useState('')
 
+  let lstAddr = [
+    {
+      cep: '71.060-042',
+      cidade: 'Brasília',
+      uf: 'DF',
+      logradouro: 'QE 28 conjunto D nº 26',
+      complemento: 'casa',
+      bairro: 'Guará 2',
+    },
+    {
+      cep: '60.332-763',
+      cidade: 'Fortaleza',
+      uf: 'CE',
+      logradouro: 'Travessa Tropical',
+      complemento: 'Ed. Residencial Lua Azul, Bl. "B" apt. nº 25',
+      bairro: 'Barra do Ceará',
+    },
+  ]
+  const [listAddress, setListAddress] = useState(lstAddr)
+
   // email
 
   useEffect(() => {
@@ -329,14 +349,6 @@ const Principal = (prop) => {
                 </CAccordionButton>
               </CAccordionHeader>
               <CAccordionCollapse visible={activeKey === 2}>
-                <CCard>
-                  <CCardHeader style={{ display: 'flex', justifyContent: 'flex-end' }}>
-                    <CButton>
-                      <CIcon name="cil-plus" style={{ margin: 0, padding: 0 }} />
-                      Adicionar Endereço
-                    </CButton>
-                  </CCardHeader>
-                </CCard>
                 <CAccordionBody>
                   <CForm
                     className="row g-3"
@@ -454,6 +466,68 @@ const Principal = (prop) => {
                     </CCol>
                   </CForm>
                 </CAccordionBody>
+                <CCard>
+                  <CCardHeader style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                    <CButton>
+                      <CIcon name="cil-plus" style={{ margin: 0, padding: 0 }} />
+                      Adicionar Endereço
+                    </CButton>
+                  </CCardHeader>
+
+                  <CCardBody>
+                    <CTable striped hover>
+                      <CTableHead style={{ backgroundColor: '#f5b642', color: '#FFF' }}>
+                        <CTableRow>
+                          <CTableHeaderCell scope="col">CEP</CTableHeaderCell>
+                          <CTableHeaderCell scope="col">Cidade</CTableHeaderCell>
+                          <CTableHeaderCell scope="col">UF</CTableHeaderCell>
+                          <CTableHeaderCell scope="col">Logradouro</CTableHeaderCell>
+                          <CTableHeaderCell scope="col">Complemento</CTableHeaderCell>
+                          <CTableHeaderCell scope="col">Bairro</CTableHeaderCell>
+                          <CTableHeaderCell scope="col">Ações</CTableHeaderCell>
+                        </CTableRow>
+                      </CTableHead>
+                      <CTableBody>
+                        {listAddress.map((item, index) => (
+                          <CTableRow color="light" key={index}>
+                            <CTableDataCell>{item.cep}</CTableDataCell>
+                            <CTableDataCell>{item.cidade}</CTableDataCell>
+                            <CTableDataCell>{item.uf}</CTableDataCell>
+                            <CTableDataCell>{item.logradouro}</CTableDataCell>
+                            <CTableDataCell>{item.complemento}</CTableDataCell>
+                            <CTableDataCell>{item.bairro}</CTableDataCell>
+                            <CTableDataCell>
+                              <CButton
+                                style={{
+                                  backgroundColor: '#FDC02E',
+                                  border: '#C59522',
+                                  borderRadius: 5,
+                                  color: '#000',
+                                }}
+                                disabled={!(action === 'list')}
+                              >
+                                Editar
+                              </CButton>
+                              &nbsp;
+                              <CButton
+                                style={{
+                                  backgroundColor: '#D93749',
+                                  border: '#A81425',
+                                  borderRadius: 5,
+                                  color: '#FFF',
+                                }}
+                                disabled={!(action === 'list')}
+                                onClick={() => handleDeleteButton(index)}
+                              >
+                                Excluir
+                              </CButton>
+                            </CTableDataCell>
+                          </CTableRow>
+                        ))}
+                      </CTableBody>
+                    </CTable>
+                  </CCardBody>
+                </CCard>
               </CAccordionCollapse>
             </CAccordionItem>
             <CAccordionItem>
