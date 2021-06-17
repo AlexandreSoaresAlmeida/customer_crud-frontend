@@ -36,7 +36,8 @@
   <p>8. New Address:</p>
   <img width="600" height="350" src="src/assets/to_readme/tela010.png" />  
   <img width="600" height="350" src="src/assets/to_readme/tela011.png" />  
-
+  <p>9. Find CEP [Public endPoint viaCep](https://viacep.com.br/):</p>
+  <img width="600" height="350" src="src/assets/to_readme/tela012.png" />  
 </p>  
 
 # Access Count:
