@@ -32,7 +32,7 @@
 | User | Password | Roles Associada |
 | --- | --- | --- |
 | admin | 123456 | [ROLE_ADMIN, ROLE_COMUM] |
-| comum | 123456 | [ROLE_ADMIN, ROLE_COMUM] |
+| comum | 123456 | [ROLE_COMUM] |
 
 # CoreUI Free React Admin Template v3
 
