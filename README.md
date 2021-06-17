@@ -33,6 +33,9 @@
   <img width="600" height="350" src="src/assets/to_readme/tela007.png" />  
   <p>7. New Customer:</p>
   <img width="600" height="350" src="src/assets/to_readme/tela009.png" />
+  <p>8. New Address:</p>
+  <img width="600" height="350" src="src/assets/to_readme/tela010.png" />  
+  <img width="600" height="350" src="src/assets/to_readme/tela011.png" />  
 
 </p>  
 
