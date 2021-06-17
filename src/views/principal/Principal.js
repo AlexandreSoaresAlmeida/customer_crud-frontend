@@ -43,7 +43,9 @@ const Principal = (prop) => {
   const [loading, setLoading] = useState(false)
   const [msg, setMsg] = useState('')
   const [activeKey, setActiveKey] = useState(0)
-  const [validated, setValidated] = React.useState(false)
+  const [validated, setValidated] = useState(false)
+
+  const [action, setAction] = useState('list')
 
   const [user, setUser] = useState('')
   const [cpf, setCpf] = useState('')
@@ -160,164 +162,171 @@ const Principal = (prop) => {
           </CCard>
         </CCol>
       </CRow>
-      <br></br>
-      <CCard>
-        <CCardHeader
-          style={{ color: '#321FDB', fontWeight: 'bold', paddingTop: 20, paddingBottom: 17 }}
-        >
-          <CIcon name="cil-note-add" />
-          &nbsp; Informe os dados abaixo para inclusão de novo cliente
-        </CCardHeader>
-      </CCard>
 
-      <CAccordion>
-        <CAccordionItem>
-          <CAccordionHeader>
-            <CAccordionButton
-              collapsed={activeKey !== 1}
-              onClick={() => (activeKey === 1 ? setActiveKey(0) : setActiveKey(1))}
-            >
-              Dados Pessoais
-            </CAccordionButton>
-          </CAccordionHeader>
-          <CAccordionCollapse visible={activeKey === 1}>
-            <CAccordionBody>
-              <CForm
-                className="row g-3"
-                noValidate
-                validated={validated}
-                style={{
-                  display: 'flex',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}
-                onSubmit={handleSaveData}
+      {action === 'add' ||
+        (action === 'del' && (
+          <>
+            <br></br>
+            <CCard>
+              <CCardHeader
+                style={{ color: '#321FDB', fontWeight: 'bold', paddingTop: 20, paddingBottom: 17 }}
               >
-                <CCol md="4">
-                  <CFormLabel htmlFor="inputUsuario">Usuário</CFormLabel>
-                  <CInputGroup className="mb-3">
-                    <CInputGroupText>
-                      <CIcon name="cil-short-text" />
-                    </CInputGroupText>
-                    <CFormControl
-                      type="text"
-                      id="inputUsuario"
-                      placeholder="Informe o usuário"
-                      value={user}
-                      onChange={(e) => setUser(e.target.value)}
-                      required
-                    />
-                    <CFormFeedback invalid>Informe o Usuário</CFormFeedback>
-                  </CInputGroup>
-                </CCol>
-                <CCol md="4">
-                  <CFormLabel htmlFor="inputCpf">CPF</CFormLabel>
-                  <CInputGroup className="mb-3">
-                    <CInputGroupText>
-                      <CIcon name="cil-lock-locked" />
-                    </CInputGroupText>
-                    <CFormControl
-                      type="text"
-                      id="inputCpf"
-                      placeholder="Informe o CPF"
-                      value={cpf}
-                      onChange={(e) => setCpf(e.target.value)}
-                      required
-                    />
-                    <CFormFeedback invalid>Informe o CPF</CFormFeedback>
-                  </CInputGroup>
-                </CCol>
-                <CCol md="4">
-                  <CFormLabel htmlFor="inputRole">Perfil</CFormLabel>
-                  <CInputGroup className="mb-3">
-                    <CInputGroupText>
-                      <CIcon name="cil-user" />
-                    </CInputGroupText>
-                    <CFormSelect id="inputRole">
-                      <option>ADMIN</option>
-                      <option>COMUM</option>
-                    </CFormSelect>
-                  </CInputGroup>
-                </CCol>
-                <CCol xs="12">
-                  <CFormLabel htmlFor="inputNome">Nome</CFormLabel>
-                  <CInputGroup className="mb-3">
-                    <CInputGroupText>
-                      <CIcon name="cil-user" />
-                    </CInputGroupText>
-                    <CFormControl id="inputNome" placeholder="Pedro Paulo Matheus Jr..." />
-                  </CInputGroup>
-                </CCol>
-              </CForm>
-            </CAccordionBody>
-          </CAccordionCollapse>
-        </CAccordionItem>
-        <CAccordionItem>
-          <CAccordionHeader>
-            <CAccordionButton
-              collapsed={activeKey !== 2}
-              onClick={() => (activeKey === 2 ? setActiveKey(0) : setActiveKey(2))}
-            >
-              Endereços
-            </CAccordionButton>
-          </CAccordionHeader>
-          <CAccordionCollapse visible={activeKey === 2}>
-            <CAccordionBody>endereços aqui</CAccordionBody>
-          </CAccordionCollapse>
-        </CAccordionItem>
-        <CAccordionItem>
-          <CAccordionHeader>
-            <CAccordionButton
-              collapsed={activeKey !== 3}
-              onClick={() => (activeKey === 3 ? setActiveKey(0) : setActiveKey(3))}
-            >
-              Telefones
-            </CAccordionButton>
-          </CAccordionHeader>
-          <CAccordionCollapse visible={activeKey === 3}>
-            <CAccordionBody>telefones aqui</CAccordionBody>
-          </CAccordionCollapse>
-        </CAccordionItem>
-        <CAccordionItem>
-          <CAccordionHeader>
-            <CAccordionButton
-              collapsed={activeKey !== 3}
-              onClick={() => (activeKey === 3 ? setActiveKey(0) : setActiveKey(3))}
-            >
-              Emails
-            </CAccordionButton>
-          </CAccordionHeader>
-          <CAccordionCollapse visible={activeKey === 3}>
-            <CAccordionBody>
-              <strong>This is the third item`s accordion body.</strong> It is hidden by default,
-              until the collapse plugin adds the appropriate classes that we use to style each
-              element. These classes control the overall appearance, as well as the showing and
-              hiding via CSS transitions. You can modify any of this with custom CSS or overriding
-              our default variables. It´s also worth noting that just about any HTML can go within
-              the <code>.accordion-body</code>, though the transition does limit overflow.
-            </CAccordionBody>
-          </CAccordionCollapse>
-        </CAccordionItem>
-      </CAccordion>
+                <CIcon name="cil-note-add" />
+                &nbsp; Informe os dados abaixo para inclusão de novo cliente
+              </CCardHeader>
+            </CCard>
 
-      <CFooter
-        style={{
-          display: 'flex',
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-          backgroundColor: '#394fbd',
-        }}
-      >
-        <CButton
-          color="primary"
-          className="px-4"
-          style={{ backgroundColor: '#203ABD' }}
-          onClick={handleSaveData}
-        >
-          Gravar Dados
-        </CButton>
-      </CFooter>
-      <br></br>
+            <CAccordion>
+              <CAccordionItem>
+                <CAccordionHeader>
+                  <CAccordionButton
+                    collapsed={activeKey !== 1}
+                    onClick={() => (activeKey === 1 ? setActiveKey(0) : setActiveKey(1))}
+                  >
+                    Dados Pessoais
+                  </CAccordionButton>
+                </CAccordionHeader>
+                <CAccordionCollapse visible={activeKey === 1}>
+                  <CAccordionBody>
+                    <CForm
+                      className="row g-3"
+                      noValidate
+                      validated={validated}
+                      style={{
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                      }}
+                      onSubmit={handleSaveData}
+                    >
+                      <CCol md="4">
+                        <CFormLabel htmlFor="inputUsuario">Usuário</CFormLabel>
+                        <CInputGroup className="mb-3">
+                          <CInputGroupText>
+                            <CIcon name="cil-short-text" />
+                          </CInputGroupText>
+                          <CFormControl
+                            type="text"
+                            id="inputUsuario"
+                            placeholder="Informe o usuário"
+                            value={user}
+                            onChange={(e) => setUser(e.target.value)}
+                            required
+                          />
+                          <CFormFeedback invalid>Informe o Usuário</CFormFeedback>
+                        </CInputGroup>
+                      </CCol>
+                      <CCol md="4">
+                        <CFormLabel htmlFor="inputCpf">CPF</CFormLabel>
+                        <CInputGroup className="mb-3">
+                          <CInputGroupText>
+                            <CIcon name="cil-lock-locked" />
+                          </CInputGroupText>
+                          <CFormControl
+                            type="text"
+                            id="inputCpf"
+                            placeholder="Informe o CPF"
+                            value={cpf}
+                            onChange={(e) => setCpf(e.target.value)}
+                            required
+                          />
+                          <CFormFeedback invalid>Informe o CPF</CFormFeedback>
+                        </CInputGroup>
+                      </CCol>
+                      <CCol md="4">
+                        <CFormLabel htmlFor="inputRole">Perfil</CFormLabel>
+                        <CInputGroup className="mb-3">
+                          <CInputGroupText>
+                            <CIcon name="cil-user" />
+                          </CInputGroupText>
+                          <CFormSelect id="inputRole">
+                            <option>ADMIN</option>
+                            <option>COMUM</option>
+                          </CFormSelect>
+                        </CInputGroup>
+                      </CCol>
+                      <CCol xs="12">
+                        <CFormLabel htmlFor="inputNome">Nome</CFormLabel>
+                        <CInputGroup className="mb-3">
+                          <CInputGroupText>
+                            <CIcon name="cil-user" />
+                          </CInputGroupText>
+                          <CFormControl id="inputNome" placeholder="Pedro Paulo Matheus Jr..." />
+                        </CInputGroup>
+                      </CCol>
+                    </CForm>
+                  </CAccordionBody>
+                </CAccordionCollapse>
+              </CAccordionItem>
+              <CAccordionItem>
+                <CAccordionHeader>
+                  <CAccordionButton
+                    collapsed={activeKey !== 2}
+                    onClick={() => (activeKey === 2 ? setActiveKey(0) : setActiveKey(2))}
+                  >
+                    Endereços
+                  </CAccordionButton>
+                </CAccordionHeader>
+                <CAccordionCollapse visible={activeKey === 2}>
+                  <CAccordionBody>endereços aqui</CAccordionBody>
+                </CAccordionCollapse>
+              </CAccordionItem>
+              <CAccordionItem>
+                <CAccordionHeader>
+                  <CAccordionButton
+                    collapsed={activeKey !== 3}
+                    onClick={() => (activeKey === 3 ? setActiveKey(0) : setActiveKey(3))}
+                  >
+                    Telefones
+                  </CAccordionButton>
+                </CAccordionHeader>
+                <CAccordionCollapse visible={activeKey === 3}>
+                  <CAccordionBody>telefones aqui</CAccordionBody>
+                </CAccordionCollapse>
+              </CAccordionItem>
+              <CAccordionItem>
+                <CAccordionHeader>
+                  <CAccordionButton
+                    collapsed={activeKey !== 3}
+                    onClick={() => (activeKey === 3 ? setActiveKey(0) : setActiveKey(3))}
+                  >
+                    Emails
+                  </CAccordionButton>
+                </CAccordionHeader>
+                <CAccordionCollapse visible={activeKey === 3}>
+                  <CAccordionBody>
+                    <strong>This is the third item`s accordion body.</strong> It is hidden by
+                    default, until the collapse plugin adds the appropriate classes that we use to
+                    style each element. These classes control the overall appearance, as well as the
+                    showing and hiding via CSS transitions. You can modify any of this with custom
+                    CSS or overriding our default variables. It´s also worth noting that just about
+                    any HTML can go within the <code>.accordion-body</code>, though the transition
+                    does limit overflow.
+                  </CAccordionBody>
+                </CAccordionCollapse>
+              </CAccordionItem>
+            </CAccordion>
+
+            <CFooter
+              style={{
+                display: 'flex',
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                backgroundColor: '#394fbd',
+              }}
+            >
+              <CButton
+                color="primary"
+                className="px-4"
+                style={{ backgroundColor: '#203ABD' }}
+                onClick={handleSaveData}
+              >
+                Gravar Dados
+              </CButton>
+            </CFooter>
+            <br></br>
+          </>
+        ))}
     </>
   )
 }
