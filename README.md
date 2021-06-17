@@ -21,7 +21,18 @@
   <img width="600" height="350" src="src/assets/to_readme/tela001.png" />
   <img width="600" height="350" src="src/assets/to_readme/tela002.png" />
   <img width="600" height="350" src="src/assets/to_readme/tela003.png" />
+  <img width="600" height="350" src="src/assets/to_readme/tela004.png" />
+  <img width="600" height="350" src="src/assets/to_readme/tela005.png" />
+  <img width="600" height="350" src="src/assets/to_readme/tela006.png" />
+  <img width="600" height="350" src="src/assets/to_readme/tela007.png" />  
 </p>  
+
+# Access Count:
+
+| User | Password | Roles Associada |
+| --- | --- | --- |
+| admin | 123456 | [ROLE_ADMIN, ROLE_COMUM] |
+| comum | 123456 | [ROLE_COMUM] |
 
 # CoreUI Free React Admin Template v3
 
