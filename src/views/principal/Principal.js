@@ -47,10 +47,27 @@ const Principal = (prop) => {
 
   const [action, setAction] = useState('list')
 
+  // usuario
   const [user, setUser] = useState('')
   const [cpf, setCpf] = useState('')
   const [role, setRole] = useState('')
   const [name, setName] = useState('')
+
+  // endereco
+  const [viacep, setViacep] = useState([])
+
+  const [cep, setCep] = useState('')
+  const [logradouro, setLogradouro] = useState('')
+  const [cidade, setCidade] = useState('')
+  const [uf, setUf] = useState('')
+  const [bairro, setBairro] = useState('')
+  const [complemento, setComplemento] = useState('')
+  const [ibge, setIbge] = useState('')
+  const [gia, setGia] = useState('')
+  const [ddd, setDdd] = useState('')
+  const [siafi, setSiafi] = useState('')
+
+  // email
 
   useEffect(() => {
     getList()
@@ -62,6 +79,22 @@ const Principal = (prop) => {
     setLoading(false)
     if (result !== undefined && result.length >= 0) {
       setList(result)
+    }
+  }
+
+  const getAddressByCep = async () => {
+    if (cep) {
+      setLoading(true)
+      const result = await api.getEmailByCep(cep)
+      setLoading(false)
+      if (result !== undefined) {
+        setViacep(result)
+
+        setLogradouro(result.logradouro)
+        setCidade(result.localidade)
+        setUf(result.uf)
+        setBairro(result.bairro)
+      }
     }
   }
 
@@ -109,11 +142,18 @@ const Principal = (prop) => {
                 xs="12"
                 style={{ paddingTop: 5, display: 'flex', justifyContent: 'space-between' }}
               >
-                <h2>Clientes</h2>
+                <h2>
+                  Clientes{' '}
+                  {action === 'add'
+                    ? ' - Adicionar Novo Cliente'
+                    : action === 'list'
+                    ? ' - Listar todos os Clientes'
+                    : ' - Editar Cliente Indicado'}
+                </h2>
                 <CButton
                   color="primary"
-                  onClick={() => handleNewCustomerButton}
-                  disabled={action == 'add'}
+                  onClick={() => handleNewCustomerButton()}
+                  disabled={action === 'add'}
                 >
                   <CIcon name="cil-check" />
                   &nbsp;Novo Cliente
@@ -146,6 +186,7 @@ const Principal = (prop) => {
                             borderRadius: 5,
                             color: '#000',
                           }}
+                          disabled={!(action === 'list')}
                         >
                           Editar
                         </CButton>
@@ -157,6 +198,7 @@ const Principal = (prop) => {
                             borderRadius: 5,
                             color: '#FFF',
                           }}
+                          disabled={!(action === 'list')}
                           onClick={() => handleDeleteButton(index)}
                         >
                           Excluir
@@ -246,7 +288,13 @@ const Principal = (prop) => {
                         <CInputGroupText>
                           <CIcon name="cil-user" />
                         </CInputGroupText>
-                        <CFormSelect id="inputRole">
+                        <CFormSelect
+                          id="inputRole"
+                          placeholder="Indique o perfil"
+                          value={role}
+                          onChange={(e) => setRole(e.target.value)}
+                          required
+                        >
                           <option>ADMIN</option>
                           <option>COMUM</option>
                         </CFormSelect>
@@ -258,7 +306,13 @@ const Principal = (prop) => {
                         <CInputGroupText>
                           <CIcon name="cil-user" />
                         </CInputGroupText>
-                        <CFormControl id="inputNome" placeholder="Pedro Paulo Matheus Jr..." />
+                        <CFormControl
+                          id="inputNome"
+                          placeholder="Pedro Paulo Matheus Jr..."
+                          value={name}
+                          onChange={(e) => setName(e.target.value)}
+                          required
+                        />
                       </CInputGroup>
                     </CCol>
                   </CForm>
@@ -275,7 +329,131 @@ const Principal = (prop) => {
                 </CAccordionButton>
               </CAccordionHeader>
               <CAccordionCollapse visible={activeKey === 2}>
-                <CAccordionBody>endereços aqui</CAccordionBody>
+                <CCard>
+                  <CCardHeader style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                    <CButton>
+                      <CIcon name="cil-plus" style={{ margin: 0, padding: 0 }} />
+                      Adicionar Endereço
+                    </CButton>
+                  </CCardHeader>
+                </CCard>
+                <CAccordionBody>
+                  <CForm
+                    className="row g-3"
+                    noValidate
+                    validated={validated}
+                    style={{
+                      display: 'flex',
+                      justifyContent: 'flex-start',
+                      alignItems: 'center',
+                    }}
+                    onSubmit={handleSaveData}
+                  >
+                    <CCol md="4">
+                      <CFormLabel htmlFor="inputCep">CEP</CFormLabel>
+                      <CInputGroup className="mb-3">
+                        <CInputGroupText>
+                          <CIcon name="cil-short-text" />
+                        </CInputGroupText>
+                        <CFormControl
+                          type="text"
+                          id="inputCep"
+                          placeholder="Informe o cep"
+                          value={cep}
+                          onChange={(e) => setCep(e.target.value)}
+                          required
+                        />
+                        <CInputGroupText style={{ backgroundColor: '#30A54A', cursor: 'pointer' }}>
+                          <CIcon
+                            name="cil-find-in-page"
+                            style={{ color: '#FFF', backgroundColor: '#30A54A' }}
+                            onClick={() => getAddressByCep()}
+                          />
+                        </CInputGroupText>
+
+                        <CFormFeedback invalid>Informe o CEP</CFormFeedback>
+                      </CInputGroup>
+                    </CCol>
+                    <CCol md="4">
+                      <CFormLabel htmlFor="inputCidade">Cidade</CFormLabel>
+                      <CInputGroup className="mb-3">
+                        <CInputGroupText>
+                          <CIcon name="cil-short-text" />
+                        </CInputGroupText>
+                        <CFormControl
+                          type="text"
+                          id="inputCidade"
+                          placeholder="Informe a cidade"
+                          value={cidade}
+                          onChange={(e) => setCidade(e.target.value)}
+                          required
+                        />
+                        <CFormFeedback invalid>Informe a Cidade</CFormFeedback>
+                      </CInputGroup>
+                    </CCol>
+                    <CCol md="4">
+                      <CFormLabel htmlFor="inputCidade">UF</CFormLabel>
+                      <CInputGroup className="mb-3">
+                        <CInputGroupText>
+                          <CIcon name="cil-short-text" />
+                        </CInputGroupText>
+                        <CFormControl
+                          type="text"
+                          id="inputUf"
+                          placeholder="Informe a UF"
+                          value={uf}
+                          onChange={(e) => setUf(e.target.value)}
+                          required
+                        />
+                        <CFormFeedback invalid>Informe a UF</CFormFeedback>
+                      </CInputGroup>
+                    </CCol>
+                    <CCol xs="12">
+                      <CFormLabel htmlFor="inputLogradouro">Logradouro</CFormLabel>
+                      <CInputGroup className="mb-3">
+                        <CInputGroupText>
+                          <CIcon name="cil-user" />
+                        </CInputGroupText>
+                        <CFormControl
+                          id="inputLogradouro"
+                          placeholder="Rua Afonso de..."
+                          value={logradouro}
+                          onChange={(e) => setLogradouro(e.target.value)}
+                          required
+                        />
+                      </CInputGroup>
+                    </CCol>
+                    <CCol md="6">
+                      <CFormLabel htmlFor="inputComplemento">Complemento</CFormLabel>
+                      <CInputGroup className="mb-3">
+                        <CInputGroupText>
+                          <CIcon name="cil-user" />
+                        </CInputGroupText>
+                        <CFormControl
+                          id="inputComplemento"
+                          placeholder="informe o complemento"
+                          value={complemento}
+                          onChange={(e) => setComplemento(e.target.value)}
+                        />
+                      </CInputGroup>
+                    </CCol>
+                    <CCol md="6">
+                      <CFormLabel htmlFor="inputBairro">Bairro</CFormLabel>
+                      <CInputGroup className="mb-3">
+                        <CInputGroupText>
+                          <CIcon name="cil-user" />
+                        </CInputGroupText>
+                        <CFormControl
+                          id="inputBairro"
+                          placeholder="informe o bairro"
+                          value={bairro}
+                          onChange={(e) => setBairro(e.target.value)}
+                          required
+                        />
+                      </CInputGroup>
+                    </CCol>
+                  </CForm>
+                </CAccordionBody>
               </CAccordionCollapse>
             </CAccordionItem>
             <CAccordionItem>
@@ -301,15 +479,7 @@ const Principal = (prop) => {
                 </CAccordionButton>
               </CAccordionHeader>
               <CAccordionCollapse visible={activeKey === 3}>
-                <CAccordionBody>
-                  <strong>This is the third item`s accordion body.</strong> It is hidden by default,
-                  until the collapse plugin adds the appropriate classes that we use to style each
-                  element. These classes control the overall appearance, as well as the showing and
-                  hiding via CSS transitions. You can modify any of this with custom CSS or
-                  overriding our default variables. It´s also worth noting that just about any HTML
-                  can go within the <code>.accordion-body</code>, though the transition does limit
-                  overflow.
-                </CAccordionBody>
+                <CAccordionBody>Emails aqui.</CAccordionBody>
               </CAccordionCollapse>
             </CAccordionItem>
           </CAccordion>
@@ -329,6 +499,14 @@ const Principal = (prop) => {
               onClick={handleSaveData}
             >
               Gravar Dados
+            </CButton>
+            <CButton
+              color="primary"
+              className="px-4"
+              style={{ backgroundColor: '#C0B0C0', color: '#000' }}
+              onClick={() => setAction('list')}
+            >
+              Cancelar
             </CButton>
           </CFooter>
           <br></br>

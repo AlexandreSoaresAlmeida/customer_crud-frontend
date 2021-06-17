@@ -85,5 +85,10 @@ export default () => {
       let json = await request('delete', '/clientes', { id }, token)
       return json
     },
+    getEmailByCep: async (cep) => {
+      let token = localStorage.getItem('token')
+      let json = await request('get', `/viacep/${cep}`, {}, token)
+      return json
+    },
   }
 }
