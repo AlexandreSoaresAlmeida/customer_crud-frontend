@@ -27,12 +27,18 @@
   <img width="600" height="350" src="src/assets/to_readme/tela007.png" />  
 </p>  
 
-# Contas de acesso:
+# Access Count:
+
+| User | Password | Roles Associada |
+| --- | --- |
+| admin | 123456 | [ROLE_ADMIN, ROLE_COMUM] |
+| comum | 123456 | [ROLE_ADMIN, ROLE_COMUM] |
+
 1. Usuário: admin
    Senha: 123456
    
 3. Usuário: comum
-   Seha: 123456
+   Senha: 123456
 
 # CoreUI Free React Admin Template v3
 
