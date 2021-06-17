@@ -32,7 +32,7 @@
   <p>6. Exclude Customer:</p>
   <img width="600" height="350" src="src/assets/to_readme/tela007.png" />  
   <p>7. New Customer:</p>
-  <img width="600" height="350" src="src/assets/to_readme/tela008.png" />
+  <img width="600" height="350" src="src/assets/to_readme/tela009.png" />
 
 </p>  
 
