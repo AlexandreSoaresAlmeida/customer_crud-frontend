@@ -16,7 +16,9 @@
 [npm]: https://www.npmjs.com/package/@coreui/react
 
 # Project CRUD Customer - Screen View
-
+<p align="center">
+  <img width="400" height="300" src="src/assets/to_readme/tela000.png"
+</p>  
 
 # CoreUI Free React Admin Template v3
 
