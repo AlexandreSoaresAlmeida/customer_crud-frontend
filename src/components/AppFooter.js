@@ -4,7 +4,7 @@ import { CFooter } from '@coreui/react'
 const AppFooter = () => {
   const versao = `${process.env.REACT_APP_VERSAO}`
   return (
-    <CFooter style={{ backgroundColor: '#FFFFFF' }}>
+    <CFooter position="sticky" style={{ backgroundColor: '#FFFFFF' }}>
       <div>
         <span
           className="ms-1"

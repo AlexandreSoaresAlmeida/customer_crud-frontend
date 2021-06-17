@@ -56,15 +56,11 @@ const Login = (prop) => {
       event.stopPropagation()
     }
     const result = await api.login(usuario, senha)
-    // localStorage.setItem('token', result.token)
     if (result.status === 200) {
-      // alert('>>> teste: ' + props.token)
-
       prop.setToken(result.token)
       prop.setUsername(result.username)
       prop.setRoles(result.roles)
       prop.setTimestamp(result.timestamp)
-
       history.push('/Principal')
     } else {
       setErrologin(result.message)

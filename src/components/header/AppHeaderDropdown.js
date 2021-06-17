@@ -1,9 +1,7 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import {
   CAvatar,
-  CBadge,
   CDropdown,
   CDropdownDivider,
   CDropdownHeader,
@@ -24,6 +22,10 @@ const AppHeaderDropdown = (prop) => {
     history.push('/Login')
   }
 
+  const crudCustomer = () => {
+    history.push('/Principal')
+  }
+
   return (
     <CDropdown variant="nav-item">
       <CDropdownToggle placement="bottom-end" className="py-0" caret={false}>
@@ -40,7 +42,7 @@ const AppHeaderDropdown = (prop) => {
           Grupos: {prop.roles}
         </CDropdownItem>
         <CDropdownDivider />
-        <CDropdownItem href="#" style={{ color: '#00FF' }}>
+        <CDropdownItem href="" style={{ color: '#00FF' }} onClick={() => crudCustomer()}>
           <CIcon name="cil-pen-alt" className="me-2" style={{ color: '#00FF' }} />
           CRUD Cliente
         </CDropdownItem>
