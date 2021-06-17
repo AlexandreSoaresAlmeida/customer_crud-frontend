@@ -17,7 +17,8 @@
 
 # Project CRUD Customer - Screen View
 <p align="center">
-  <img width="600" height="350" src="src/assets/to_readme/tela000.png"
+  <img width="600" height="350" src="src/assets/to_readme/tela000.png" />
+  <img width="600" height="350" src="src/assets/to_readme/tela000.png" />
 </p>  
 
 # CoreUI Free React Admin Template v3
