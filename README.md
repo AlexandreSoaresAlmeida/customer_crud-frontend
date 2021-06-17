@@ -15,6 +15,9 @@
 [npm-next]: https://img.shields.io/npm/v/@coreui/react/next.png?style=flat-square
 [npm]: https://www.npmjs.com/package/@coreui/react
 
+# Project CRUD Customer - Screen View
+
+
 # CoreUI Free React Admin Template v3
 
 CoreUI is meant to be the UX game changer. Pure & transparent code is devoid of redundant components, so the app is light enough to offer ultimate user experience. This means mobile devices also, where the navigation is just as easy and intuitive as on a desktop or laptop. The CoreUI Layout API lets you customize your project for almost any device – be it Mobile, Web or WebApp – CoreUI covers them all!
@@ -41,16 +44,6 @@ CoreUI is meant to be the UX game changer. Pure & transparent code is devoid of 
 * [CoreUI Free Laravel Admin Template](https://github.com/coreui/coreui-free-laravel-admin-template)
 * [CoreUI Free Vue.js + Laravel Admin Template](https://github.com/coreui/coreui-free-vue-laravel-admin-template)
 
-## CoreUI Pro
-
-**Only customers with [Enterpise Membership Plan](https://coreui.io/pro/#buy) have access to private github CoreUI Pro repository.**
-
-* 💪  [CoreUI Pro Bootstrap Admin Template](https://coreui.io/pro/)
-* 💪  [CoreUI Pro Angular 9+ Admin Template](https://coreui.io/pro/angular)
-* 💪  [CoreUI Pro React Admin Template](https://coreui.io/pro/react)
-* 💪  [CoreUI Pro Vue Admin Template](https://coreui.io/pro/vue)
-* 💪  [CoreUI Pro Laravel Admin Template](https://coreui.io/pro/laravel/)
-* 💪  [CoreUI Pro Vue.js + Laravel Admin Template](https://coreui.io/pro/vue-laravel/)
 
 ## Installation
 
