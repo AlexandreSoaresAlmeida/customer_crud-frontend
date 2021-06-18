@@ -20,6 +20,5 @@ export default (state = initialState, action) => {
       return { ...state, timestamp: action.payload.timestamp }
       break
   }
-
   return state
 }
